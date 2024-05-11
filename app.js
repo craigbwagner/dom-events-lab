@@ -9,11 +9,9 @@ const calculator = {
 /*-------------------------------- Variables --------------------------------*/
 
 /*------------------------ Cached Element References ------------------------*/
+const calculatorElement = document.querySelector('.calculator');
 const displayElement = document.querySelector('.display');
-
-// const inputEl = document.querySelector('.input');
-// const buttonElements = inputEl.children;
-
+const buttonElements = document.querySelectorAll('.button');
 const numberElement = document.querySelector('.number');
 const addElement = document.querySelector('.add');
 const subtractElement = document.querySelector('.subtract');
@@ -22,17 +20,16 @@ const divideElement = document.querySelector('.divide');
 const clearElement = document.querySelector('.clear');
 
 /*----------------------------- Event Listeners -----------------------------*/
-'click',
-	() => {
-		console.log('click');
-	};
+buttonElements.forEach((button) => {
+	button.addEventListener('click', buttonResponse);
+});
 
 /*-------------------------------- Functions --------------------------------*/
-const buttonResponse = (event) => {
-	// if (event.target.class === 'number') {
-	//    switch (event.target.textContent) {
-	//    }
-	// }
+function buttonResponse(event) {
+	if (event.target.class === 'number') {
+		console.log(event.target.textContent);
+		setDisplay(event.target.textContent);
+	}
 	if (event.target.class === 'operator') {
 		setOperator(event);
 	}
@@ -40,9 +37,10 @@ const buttonResponse = (event) => {
 	// }
 	// if (event.target.class === 'equals') {
 	// }
-};
+}
 
 const setDisplay = () => {
+	console.log('click');
 	displayElement.textContent = calculator.displayValue;
 };
 
@@ -78,4 +76,4 @@ const compute = () => {
 	}
 };
 
-setDisplay();
+displayElement.textContent = '_';
