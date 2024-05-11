@@ -33,14 +33,9 @@ const buttonResponse = (event) => {
 	//    switch (event.target.textContent) {
 	//    }
 	// }
-	// if (event.target.class === 'add') {
-	// }
-	// if (event.target.class === 'subtract') {
-	// }
-	// if (event.target.class === 'multiply') {
-	// }
-	// if (event.target.class === 'divide') {
-	// }
+	if (event.target.class === 'operator') {
+		setOperator(event);
+	}
 	// if (event.target.class === 'clear') {
 	// }
 	// if (event.target.class === 'equals') {
@@ -53,8 +48,9 @@ const setDisplay = () => {
 
 const setOperator = (event) => {
 	if (calculator.displayValue !== '_') {
-		calculator.operator = event.target.class;
+		calculator.operator = event.target.id;
 	}
+	console.log(calculator.operator);
 };
 
 const clear = () => {
