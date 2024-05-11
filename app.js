@@ -57,6 +57,13 @@ const setOperator = (event) => {
 	}
 };
 
+const clear = () => {
+	calculator.displayValue = '_';
+	calculator.inputs = [];
+	calculator.result = null;
+	calculator.operator = null;
+};
+
 const compute = () => {
 	switch (calculator.operator) {
 		case 'add':
