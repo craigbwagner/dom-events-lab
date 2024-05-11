@@ -26,8 +26,7 @@ buttonElements.forEach((button) => {
 
 /*-------------------------------- Functions --------------------------------*/
 function buttonResponse(event) {
-	if (event.target.class === 'number') {
-		console.log(event.target.textContent);
+	if (event.target.className.includes('number')) {
 		setDisplay(event.target.textContent);
 	}
 	if (event.target.class === 'operator') {
@@ -39,8 +38,13 @@ function buttonResponse(event) {
 	// }
 }
 
-const setDisplay = () => {
+const setDisplay = (text) => {
 	console.log('click');
+	if (calculator.displayValue === '_') {
+		calculator.displayValue = text;
+	} else {
+		calculator.displayValue += text;
+	}
 	displayElement.textContent = calculator.displayValue;
 };
 
