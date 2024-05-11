@@ -2,7 +2,8 @@
 const calculator = {
 	displayValue: '_',
 	operation: null,
-	inputs: [], //pressing an operator will push the first value into this array
+	inputs: [],
+	result: null, //pressing an operator will push the first value into this array
 };
 
 /*-------------------------------- Variables --------------------------------*/
@@ -56,6 +57,17 @@ const setOperator = (event) => {
 	}
 };
 
-const compute = () => {};
+const compute = () => {
+	switch (calculator.operator) {
+		case 'add':
+			calculator.result = calculator.inputs[0] + calculator.inputs[1];
+		case 'subtract':
+			calculator.result = calculator.inputs[0] - calculator.inputs[1];
+		case 'multiply':
+			calculator.result = calculator.inputs[0] * calculator.inputs[1];
+		case 'divide':
+			calculator.result = calculator.inputs[0] / calculator.inputs[1];
+	}
+};
 
 setDisplay();
