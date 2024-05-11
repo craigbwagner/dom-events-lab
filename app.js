@@ -50,7 +50,11 @@ const setDisplay = () => {
 	displayElement.textContent = calculator.displayValue;
 };
 
-const setOperator = () => {};
+const setOperator = (event) => {
+	if (calculator.displayValue !== '_') {
+		calculator.operator = event.target.class;
+	}
+};
 
 const compute = () => {};
 
