@@ -29,11 +29,12 @@ function buttonResponse(event) {
 	if (event.target.className.includes('number')) {
 		setDisplay(event.target.textContent);
 	}
-	if (event.target.class === 'operator') {
+	if (event.target.className.includes('operator')) {
 		setOperator(event);
 	}
-	// if (event.target.class === 'clear') {
-	// }
+	if (event.target.className.includes('clear')) {
+		clear();
+	}
 	// if (event.target.class === 'equals') {
 	// }
 }
@@ -62,6 +63,7 @@ const setOperator = (event) => {
 
 const clear = () => {
 	calculator.displayValue = '_';
+	displayElement.textContent = calculator.displayValue;
 	calculator.inputs = [];
 	calculator.result = null;
 	calculator.operator = null;
