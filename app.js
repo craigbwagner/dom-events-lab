@@ -47,10 +47,15 @@ const setDisplay = () => {
 };
 
 const setOperator = (event) => {
-	if (calculator.displayValue !== '_') {
-		calculator.operator = event.target.id;
+	if (calculator.displayValue === '_') {
+		return;
+	} else if (result !== null) {
+		calculator.inputs = [];
+		calculator.inputs.push(calculator.inputs.result);
 	}
-	console.log(calculator.operator);
+	calculator.operator = event.target.id;
+
+	//console.log(calculator.operator);
 };
 
 const clear = () => {
