@@ -45,7 +45,6 @@ const setDisplay = (text) => {
 	if (calculator.displayValue === '_') {
 		calculator.displayValue = text;
 	} else if (
-		//if the operation is defined and the stored displayValue is empty
 		calculator.operation !== null &&
 		calculator.displayValue.length === 0
 	) {
@@ -60,12 +59,14 @@ const setDisplay = (text) => {
 const setOperator = (event) => {
 	if (calculator.displayValue === '_') {
 		return;
-	} else if (calculator.result === null) {
+	} else if (calculator.lastResult === null) {
 		calculator.inputs.push(calculator.displayValue);
 		calculator.displayValue = '';
 		console.log(calculator);
 	} else {
-		calculator.inputs;
+		//if performing a calculation based on the previous result
+		calculator.inputs.push(calculator.lastResult);
+		calculator.displayValue = '';
 	}
 	calculator.operation = event.target.id;
 };
@@ -107,6 +108,7 @@ const compute = () => {
 		displayElement.textContent = calculator.result;
 		calculator.result = null;
 		calculator.operation = null;
+		calculator.inputs = [];
 	}
 };
 
