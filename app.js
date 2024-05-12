@@ -3,7 +3,8 @@ const calculator = {
 	displayValue: '_',
 	operation: null,
 	inputs: [],
-	result: null, //pressing an operator will push the first value into this array
+	result: null,
+	lastResult: null,
 };
 
 /*-------------------------------- Variables --------------------------------*/
@@ -35,13 +36,20 @@ function buttonResponse(event) {
 	if (event.target.className.includes('clear')) {
 		clear();
 	}
-	// if (event.target.class === 'equals') {
-	// }
+	if (event.target.className.includes('equals')) {
+		compute();
+	}
 }
 
 const setDisplay = (text) => {
-	console.log('click');
 	if (calculator.displayValue === '_') {
+		calculator.displayValue = text;
+	} else if (
+		//if the operation is defined and the stored displayValue is empty
+		calculator.operation !== null &&
+		calculator.displayValue.length === 0
+	) {
+		console.log('hello');
 		calculator.displayValue = text;
 	} else {
 		calculator.displayValue += text;
@@ -52,13 +60,14 @@ const setDisplay = (text) => {
 const setOperator = (event) => {
 	if (calculator.displayValue === '_') {
 		return;
-	} else if (result !== null) {
-		calculator.inputs = [];
-		calculator.inputs.push(calculator.inputs.result);
+	} else if (calculator.result === null) {
+		calculator.inputs.push(calculator.displayValue);
+		calculator.displayValue = '';
+		console.log(calculator);
+	} else {
+		calculator.inputs;
 	}
-	calculator.operator = event.target.id;
-
-	//console.log(calculator.operator);
+	calculator.operation = event.target.id;
 };
 
 const clear = () => {
@@ -66,19 +75,38 @@ const clear = () => {
 	displayElement.textContent = calculator.displayValue;
 	calculator.inputs = [];
 	calculator.result = null;
-	calculator.operator = null;
+	calculator.operation = null;
+	calculator.lastResult = null;
 };
 
 const compute = () => {
-	switch (calculator.operator) {
-		case 'add':
-			calculator.result = calculator.inputs[0] + calculator.inputs[1];
-		case 'subtract':
-			calculator.result = calculator.inputs[0] - calculator.inputs[1];
-		case 'multiply':
-			calculator.result = calculator.inputs[0] * calculator.inputs[1];
-		case 'divide':
-			calculator.result = calculator.inputs[0] / calculator.inputs[1];
+	if (calculator.inputs.length == 1) {
+		calculator.inputs.push(calculator.displayValue);
+
+		for (let i = 0; i < 2; i++) {
+			calculator.inputs[i] = Number(calculator.inputs[i]);
+		}
+		console.log(calculator);
+
+		switch (calculator.operation) {
+			case 'add':
+				calculator.result = calculator.inputs[0] + calculator.inputs[1];
+				break;
+			case 'subtract':
+				calculator.result = calculator.inputs[0] - calculator.inputs[1];
+				break;
+			case 'multiply':
+				calculator.result = calculator.inputs[0] * calculator.inputs[1];
+				break;
+			case 'divide':
+				calculator.result = calculator.inputs[0] / calculator.inputs[1];
+				break;
+		}
+
+		calculator.lastResult = calculator.result;
+		displayElement.textContent = calculator.result;
+		calculator.result = null;
+		calculator.operation = null;
 	}
 };
 
